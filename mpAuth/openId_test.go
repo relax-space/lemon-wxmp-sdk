@@ -3,9 +3,10 @@ package mpAuth
 import (
 	"flag"
 	"fmt"
-	"lemon-wxmp-sdk/core"
 	"os"
 	"testing"
+
+	"github.com/relax-space/lemon-wxmp-sdk/core"
 
 	"github.com/relax-space/go-kit/test"
 )

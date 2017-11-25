@@ -2,7 +2,9 @@ package mpAuth
 
 import (
 	"fmt"
-	"lemon-wxmp-sdk/core"
+	"net/url"
+
+	"github.com/relax-space/lemon-wxmp-sdk/core"
 
 	"github.com/relax-space/go-kit/httpreq"
 )
@@ -32,8 +34,8 @@ func GetUrlForAccessToken(dto *ReqDto) (reqUrl string) {
 	}
 	return fmt.Sprintf("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%v&redirect_uri=%v?reurl=%v&response_type=code&scope=%v&state=%v#wechat_redirect",
 		dto.AppId,
-		dto.RedirectUrl,
-		dto.PageUrl,
+		url.QueryEscape(dto.RedirectUrl),
+		url.QueryEscape(dto.PageUrl),
 		dto.Scope,
 		dto.State,
 	)
