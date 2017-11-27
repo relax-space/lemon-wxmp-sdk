@@ -12,11 +12,11 @@ import (
 type ReqDto struct {
 	AppId string `json:"app_id"` //required
 	Scope string `json:"scope"`  //option
-	State string `json:"state"`  //state
+	State string `json:"state"`  //option
 
 	//Secret      string `json:"secret"`
 	RedirectUrl string `json:"redirect_url"`
-	PageUrl     string `json:"page_url"`
+	PageUrl     string `json:"page_url"` //option
 }
 
 type RespDto struct {
@@ -31,6 +31,17 @@ type RespDto struct {
 func GetUrlForAccessToken(dto *ReqDto) (reqUrl string) {
 	if len(dto.Scope) == 0 {
 		dto.Scope = core.SNSAPI_BASE
+	}
+	if len(dto.State) == 0 {
+		dto.State = "state"
+	}
+	if len(dto.PageUrl) == 0 {
+		return fmt.Sprintf("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%v&redirect_uri=%v&response_type=code&scope=%v&state=%v#wechat_redirect",
+			dto.AppId,
+			url.QueryEscape(dto.RedirectUrl),
+			dto.Scope,
+			dto.State,
+		)
 	}
 	return fmt.Sprintf("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%v&redirect_uri=%v?reurl=%v&response_type=code&scope=%v&state=%v#wechat_redirect",
 		dto.AppId,
