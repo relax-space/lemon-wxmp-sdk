@@ -11,12 +11,12 @@ import (
 
 type ReqDto struct {
 	AppId string `json:"app_id" query:"app_id"` //required
-	Scope string `json:"scope" query:"app_id"`  //option
-	State string `json:"state" query:"app_id"`  //option
+	Scope string `json:"scope" query:"scope"`   //option
+	State string `json:"state" query:"state"`   //option
 
 	//Secret      string `json:"secret"`
-	RedirectUrl string `json:"redirect_url" query:"app_id"`
-	PageUrl     string `json:"page_url" query:"app_id"` //option
+	RedirectUrl string `json:"redirect_url" query:"redirect_url"`
+	PageUrl     string `json:"page_url" query:"page_url"` //option
 }
 
 type RespDto struct {
